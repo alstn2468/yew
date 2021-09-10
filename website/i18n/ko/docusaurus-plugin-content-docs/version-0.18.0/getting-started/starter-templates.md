@@ -11,8 +11,8 @@ title: "스타터 템플릿"
 - [Minimal Template](https://github.com/yewstack/yew-wasm-pack-minimal)은 `wasm-pack`과
   `rollup`을 사용하여 애플리케이션 및 이를 서비스할 자체 서버를 구축합니다. 더 추가할 것은 없습니다.
 
-- [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template)은 개발을 간소화 하기 위해 Webpack으로 `wasm-pack` 과
-  [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin)을 사용합니다.
+- [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template)은 Webpack으로 `wasm-pack` 과
+  [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin)을 사용해서 개발을 간소화 합니다.
 
 
 다른 도구들과는 다르게 `wasm-pack`은 `bin` crate가 아닌 `lib` crate를 사용하도록 강제합니다.
