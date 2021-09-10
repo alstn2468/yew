@@ -20,7 +20,7 @@ breaking changes 를 해결할 것입니다.
 DOM을 조작하는 코드를 직접 작성할 필요 없이 매크로가 직접 해결해줍니다.
 
 `html!` 매크로를 사용하는 것은 꽤 마법같을 겁니다. 하지만 숨기지 않습니다. 매크로가 어떻게 작동하는지 궁금하다면
-프로그램에서 `html!` 매크로를 확장해보세요. `cargo expand` 명령어를 활용하면 Rust 매크로 확장 코드를 확인할 수 있습니다.`cargo expand` isn't shipped with
+프로그램에서 `html!` 매크로를 확장해보세요. `cargo expand` 명령어를 활용하면 Rust 매크로 확장 코드를 확인할 수 있습니다.
 `cargo expand`는 기본으로 내장되어 있지 않기 때문에 설치하지 않았다면 `cargo install cargo-expand` 명령어를 실행해야 합니다.
 
 매크로 확장 코드를 확인하실 때는 평소보다 긴 코드를 보게 될 것입니다.
