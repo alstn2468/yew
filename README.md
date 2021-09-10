@@ -31,6 +31,8 @@
     <a href="https://yew.rs/zh-TW">繁體中文文檔</a>
     <span> | </span>
     <a href="https://yew.rs/ja">ドキュメント</a>
+    <span> | </span>
+    <a href="https://yew.rs/ko">한국어</a>
   </h4>
 </div>
 
