@@ -1,17 +1,15 @@
 ---
 title: "Refs"
-description: "Out-of-band DOM access"
+description: "대역 외 DOM 접근"
 ---
 
-The `ref` keyword can be used inside of any HTML element or component to get the DOM `Element` that 
-the item is attached to. This can be used to make changes to the DOM outside of the `view` lifecycle
-method. 
+`ref` 키워드는 HTML 요소 혹은 DOM `Element`를 가지는 컴포넌트 내부에서 사용되며 `view` lifecycle 대역 밖에서도 DOM을 변화시킬 수 있습니다.
 
-This is useful for getting ahold of canvas elements, or scrolling to different sections of a page. 
-For example, using a `NodeRef` in a component's `rendered` method allows you to make draw calls to 
-a canvas element after it has been rendered from `view`.
+해당 키워드는 캔버스 요소들을 보존하거나 다른 섹션의 페이지를 스크롤 할 때 유용합니다.
 
-The syntax is:
+예를 들어, `view`로 부터 렌더링 된 이후 컴포넌트의 `rendered` 메소드에서 `NodeRef`를 사용하여 캔버스 요소를 호출할 수 있습니다.
+
+문법:
 
 ```rust
 use yew::{html, NodeRef, web_sys::Element};
@@ -28,5 +26,6 @@ html! {
 let has_attributes = self.node_ref.cast::<Element>().unwrap().has_attributes();
 ```
 
-## Relevant examples
+## 관련 예시
+
 - [Node Refs](https://github.com/yewstack/yew/tree/v0.18/examples/node_refs)
