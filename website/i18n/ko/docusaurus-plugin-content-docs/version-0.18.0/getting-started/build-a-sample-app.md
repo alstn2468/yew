@@ -1,10 +1,8 @@
 ---
-title: "간단한 앱 구축하기"
+title: "Build a sample app"
 ---
 
-## Create Project
-
-To get started, create a new cargo project.
+First, create a new cargo project:
 
 ```bash
 cargo new yew-app
@@ -12,26 +10,7 @@ cargo new yew-app
 
 Open the newly created directory.
 
-```bash
-cd yew-app
-```
-
-## Run a hello world example
-
-To verify the Rust environment is setup, run the initial project using the cargo build tool.  After output about the build process, you should see the expected "Hello World" message.
-
-
-```bash
-cargo run
-```
-
-## Converting the project into a Yew web application
-
-To convert this simple command line application to a basic Yew web application, a few changes are needed.
-
-### Update Cargo.toml
-
-Add `yew` to the list of dependencies in the `Cargo.toml` file.
+First, let's add `yew` as a dependencies in the `Cargo.toml` file:
 
 ```toml
 [package]
@@ -41,21 +20,12 @@ edition = "2018"
 
 [dependencies]
 # you can check the latest version here: https://crates.io/crates/yew
-yew = "0.17"
+yew = "0.18"
 ```
 
-### Update main.rs
+Copy the following template into your `src/main.rs` file:
 
-We need to generate a template which sets up a root Component called `Model` which renders a button that updates its value when clicked.
-Replace the contents of `src/main.rs` with the following code.
-
-:::note
-The line `yew::start_app::<Model>()` inside `main()` starts your application and mounts it to the page's `<body>` tag.  
-If you would like to start your application with any dynamic properties, you can instead use `yew::start_app_with_props::<Model>(..)`.
-:::
-
-
-```rust ,no_run
+```rust
 use yew::prelude::*;
 
 enum Msg {
@@ -63,6 +33,9 @@ enum Msg {
 }
 
 struct Model {
+    // `ComponentLink` is like a reference to a component.
+    // It can be used to send messages to the component
+    link: ComponentLink<Self>,
     value: i64,
 }
 
@@ -70,13 +43,14 @@ impl Component for Model {
     type Message = Msg;
     type Properties = ();
 
-    fn create(_ctx: &Context<Self>) -> Self {
+    fn create(_props: Self::Properties, link: ComponentLink<Self>) -> Self {
         Self {
+            link,
             value: 0,
         }
     }
 
-    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
+    fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
@@ -87,12 +61,17 @@ impl Component for Model {
         }
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        // This gives us a component's "`Scope`" which allows us to send messages, etc to the component. 
-        let link = ctx.link();
+    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
+        // Should only return "true" if new properties are different to
+        // previously received properties.
+        // This component has no properties so we will always return "false".
+        false
+    }
+
+    fn view(&self) -> Html {
         html! {
             <div>
-                <button onclick={link.callback(|_| Msg::AddOne)}>{ "+1" }</button>
+                <button onclick=self.link.callback(|_| Msg::AddOne)>{ "+1" }</button>
                 <p>{ self.value }</p>
             </div>
         }
@@ -104,9 +83,11 @@ fn main() {
 }
 ```
 
-### Create index.html
+This template sets up your root `Component`, called `Model` which shows a button that updates itself when you click it.
+Take special note of `yew::start_app::<Model>()` inside `main()` which starts your app and mounts it to the page's `<body>` tag.
+If you would like to start your application with any dynamic properties, you can instead use `yew::start_app_with_props::<Model>(..)`.
 
-Finally, add an `index.html` file in the root directory of your app.
+Finally, add an `index.html` file in the root directory of your app:
 
 ```html
 <!DOCTYPE html>
@@ -118,18 +99,32 @@ Finally, add an `index.html` file in the root directory of your app.
 </html>
 ```
 
-## View your web application
+## Run your app
 
-Run the following command to build and serve the application locally.
+If you haven't already, install [Trunk](https://github.com/thedodd/trunk):
+
+```bash
+cargo install trunk wasm-bindgen-cli
+```
+
+If you haven't already installed it, you need to add the `wasm32-unknown-unknown` target. 
+To install this with Rustup:
+
+```bash
+rustup target add wasm32-unknown-unknown
+```
+
+Now all you have to do is run the following:
 
 ```bash
 trunk serve
 ```
 
-Trunk will helpfully rebuild your application if you modify any of its files.
+This will start a development server which continually updates the app every time you change something.
 
-## Congratulations
+## Troubleshooting
 
-You have now successfully setup your Yew development environment, and built your first web application.
+* Trunk's installation failed:
 
-Experiment with this application and review the [examples](./examples.md) to further your learning.
+  Make sure you have the development packages of openssl installed.
+  For example, libssl-dev on Ubuntu or openssl-devel on Fedora.

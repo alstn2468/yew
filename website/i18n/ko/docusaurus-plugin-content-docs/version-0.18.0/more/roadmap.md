@@ -1,6 +1,6 @@
 ---
-title: "로드맵"
-description: "Yew 프레임워크의 계획된 기능 로드맵을 소개합니다."
+title: "Roadmap"
+description: "The planned feature roadmap for the Yew framework"
 ---
 
 ## Prioritization

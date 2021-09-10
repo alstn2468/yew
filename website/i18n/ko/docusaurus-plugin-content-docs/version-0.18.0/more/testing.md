@@ -1,6 +1,6 @@
 ---
-title: "애플리케이션 테스트"
-description: "작성한 애플리케이션을 테스트합니다."
+title: "Testing apps"
+description: "Testing your app"
 ---
 
 &lt;TODO&gt;

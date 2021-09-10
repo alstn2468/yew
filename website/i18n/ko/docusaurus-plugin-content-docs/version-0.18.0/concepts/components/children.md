@@ -9,28 +9,26 @@ what type of children the component has. In such cases, the below example will
 suffice.
 
 ```rust
-use yew::{html, Children, Component, Context, Html, Properties};
+use yew::{html, Children, Component, Html, Properties};
 
-#[derive(Properties, PartialEq)]
+#[derive(Properties, Clone)]
 pub struct ListProps {
     #[prop_or_default]
     pub children: Children,
 }
 
-pub struct List;
+pub struct List {
+    props: ListProps,
+}
 
 impl Component for List {
-    type Message = ();
     type Properties = ListProps;
+    // ...
 
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self) -> Html {
         html! {
             <div class="list">
-                { for ctx.props().children.iter() }
+                { for self.props.children.iter() }
             </div>
         }
     }
@@ -44,45 +42,28 @@ In cases where you want one type of component to be passed as children to your c
 you can use `yew::html::ChildrenWithProps<T>`.
 
 ```rust
-use yew::{html, ChildrenWithProps, Component, Context, Html, Properties};
+use yew::{html, ChildrenWithProps, Component, Html, Properties};
 
-pub struct Item;
+// ...
 
-impl Component for Item {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {
-            { "item" }
-        }
-    }
-}
-
-#[derive(Properties, PartialEq)]
+#[derive(Properties, Clone)]
 pub struct ListProps {
     #[prop_or_default]
     pub children: ChildrenWithProps<Item>,
 }
 
-pub struct List;
+pub struct List {
+    props: ListProps,
+}
 
 impl Component for List {
-    type Message = ();
     type Properties = ListProps;
+    // ...
 
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self) -> Html {
         html! {
             <div class="list">
-                { for ctx.props().children.iter() }
+                { for self.props.children.iter() }
             </div>
         }
     }
@@ -99,52 +80,19 @@ for better ergonomics. If you don't want to use it, you can manually implement
 
 ```rust
 use yew::{
-    html, html::ChildrenRenderer, virtual_dom::VChild, Component, 
-    Context, Html, Properties,
+    html, html::ChildrenRenderer, virtual_dom::VChild, 
+    Component, Html, Properties
 };
 
-pub struct Primary;
-
-impl Component for Primary {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {
-            { "Primary" }
-        }
-    }
-}
-
-pub struct Secondary;
-
-impl Component for Secondary {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {
-            { "Secondary" }
-        }
-    }
-}
-
-#[derive(Clone, derive_more::From, PartialEq)]
+// `derive_more::From` implements `From<VChild<Primary>>` and
+// `From<VChild<Secondary>>` for `Item` automatically!
+#[derive(Clone, derive_more::From)]
 pub enum Item {
     Primary(VChild<Primary>),
     Secondary(VChild<Secondary>),
 }
 
 // Now, we implement `Into<Html>` so that yew knows how to render `Item`.
-#[allow(clippy::from_over_into)]
 impl Into<Html> for Item {
     fn into(self) -> Html {
         match self {
@@ -154,26 +102,24 @@ impl Into<Html> for Item {
     }
 }
 
-#[derive(Properties, PartialEq)]
+#[derive(Properties, Clone)]
 pub struct ListProps {
     #[prop_or_default]
     pub children: ChildrenRenderer<Item>,
 }
 
-pub struct List;
+pub struct List {
+    props: ListProps,
+}
 
 impl Component for List {
-    type Message = ();
     type Properties = ListProps;
+    // ...
 
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self) -> Html {
         html! {
             <div class="list">
-                { for ctx.props().children.iter() }
+                { for self.props.children.iter() }
             </div>
         }
     }
@@ -184,48 +130,26 @@ impl Component for List {
 You can also have a single optional child component of a specific type too: 
 
 ```rust
-use yew::{
-    html, html_nested, virtual_dom::VChild, Component, 
-    Context, Html, Properties
-};
+use yew::{html, virtual_dom::VChild, Component, Html, Properties};
 
-pub struct PageSideBar;
-
-impl Component for PageSideBar {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {
-            { "sidebar" }
-        }
-    }
-}
-
-#[derive(Properties, PartialEq)]
+#[derive(Clone, Properties)]
 pub struct PageProps {
     #[prop_or_default]
     pub sidebar: Option<VChild<PageSideBar>>,
 }
 
-struct Page;
+struct Page {
+    props: PageProps,
+}
 
 impl Component for Page {
-    type Message = ();
     type Properties = PageProps;
+    // ...
 
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self) -> Html {
         html! {
             <div class="page">
-                { ctx.props().sidebar.clone().map(Html::from).unwrap_or_default() }
+                { self.props.sidebar.clone().map(Html::from).unwrap_or_default() }
                 // ... page content
             </div>
         }
@@ -234,19 +158,15 @@ impl Component for Page {
 
 // The page component can be called either with the sidebar or without: 
 
-pub fn render_page(with_sidebar: bool) -> Html {
-    if with_sidebar {
-        // Page with sidebar
-        html! {
-            <Page sidebar={{html_nested! {
-                <PageSideBar />
-            }}} />
-        }
-    } else {
-        // Page without sidebar
-        html! {
-            <Page />
-        }
-    }
+// Page without sidebar
+html! {
+    <Page />
+}
+
+// Page with sidebar
+html! {
+<Page sidebar=html_nested! {
+    <PageSideBar />
+    } />
 }
 ```

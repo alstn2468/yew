@@ -1,5 +1,5 @@
 ---
-title: "리터럴과 식"
+title: "Literals and Expressions"
 ---
 ## Literals
 
@@ -18,7 +18,7 @@ html!{
         <div>{"dolor sit"}</div>
         <span>{42}</span>
     </>
-};
+}
 ```
 
 ## Expressions
@@ -27,8 +27,6 @@ You can insert expressions in your HTML using `{}` blocks, as long as they resol
 
 ```rust
 use yew::html;
-
-let show_link = true;
 
 html! {
   <div>
@@ -42,7 +40,7 @@ html! {
       }
     }
   </div>
-};
+}
 ```
 
 It often makes sense to extract these expressions into functions or closures to optimize for readability:
@@ -63,5 +61,5 @@ let maybe_display_link = move || -> Html {
 
 html! {
      <div>{maybe_display_link()}</div>
-};
+}
 ```

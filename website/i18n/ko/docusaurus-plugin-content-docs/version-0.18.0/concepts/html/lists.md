@@ -1,5 +1,5 @@
 ---
-title: "리스트"
+title: "Lists"
 ---
 
 ## Fragments
@@ -16,19 +16,18 @@ html! {
         <div></div>
         <p></p>
     </>
-};
+}
 ```
 
 <!--Invalid-->
-```rust ,compile_fail
+```rust
 use yew::html;
 
 /* error: only one root html element allowed */
-
 html! {
     <div></div>
     <p></p>
-};
+}
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
@@ -42,30 +41,26 @@ Yew supports two different syntaxes for building html from an iterator:
 ```rust
 use yew::{html, Html};
 
-let items = (1..=10).collect::<Vec<_>>();
-
 html! {
     <ul class="item-list">
-        { items.iter().collect::<Html>() }
+        { self.props.items.iter().map(renderItem).collect::<Html>() }
     </ul>
-};
+}
 ```
 
 <!--Syntax Type 2-->
 ```rust
-use yew::{html};
-
-let items = (1..=10).collect::<Vec<_>>();
+use yew::html;
 
 html! {
     <ul class="item-list">
-        { for items.iter() }
+        { for self.props.items.iter().map(renderItem) }
     </ul>
-};
+}
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
 ## Relevant examples
-- [TodoMVC](https://github.com/yewstack/yew/tree/master/examples/todomvc)
-- [Keyed List](https://github.com/yewstack/yew/tree/master/examples/keyed_list)
-- [Router](https://github.com/yewstack/yew/tree/master/examples/router)
+- [TodoMVC](https://github.com/yewstack/yew/tree/v0.18/examples/todomvc)
+- [Keyed List](https://github.com/yewstack/yew/tree/v0.18/examples/keyed_list)
+- [Router](https://github.com/yewstack/yew/tree/v0.18/examples/router)

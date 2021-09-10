@@ -1,6 +1,6 @@
 ---
-title: "참조 (Refs)"
-description: "대역외의 DOM을 접근하는 방법을 소개합니다."
+title: "Refs"
+description: "Out-of-band DOM access"
 ---
 
 The `ref` keyword can be used inside of any HTML element or component to get the DOM `Element` that 
@@ -14,40 +14,19 @@ a canvas element after it has been rendered from `view`.
 The syntax is:
 
 ```rust
-use yew::{html, web_sys::Element, Component, Context, Html, NodeRef};
+use yew::{html, NodeRef, web_sys::Element};
 
-struct Comp {
-    node_ref: NodeRef,
+// In create
+self.node_ref = NodeRef::default();
+
+// In view
+html! {
+    <div ref=self.node_ref.clone()></div>
 }
 
-impl Component for Comp {
-    type Message = ();
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self {
-            // highlight-next-line
-            node_ref: NodeRef::default(),
-        }
-    }
-
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {
-            // highlight-next-line
-            <div ref={self.node_ref.clone()}></div>
-        }
-    }
-
-    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {
-        // highlight-start
-        let has_attributes = self.node_ref
-            .cast::<Element>()
-            .unwrap()
-            .has_attributes();
-        // highlight-end
-    }
-}
+// In rendered
+let has_attributes = self.node_ref.cast::<Element>().unwrap().has_attributes();
 ```
 
 ## Relevant examples
-- [Node Refs](https://github.com/yewstack/yew/tree/master/examples/node_refs)
+- [Node Refs](https://github.com/yewstack/yew/tree/v0.18/examples/node_refs)

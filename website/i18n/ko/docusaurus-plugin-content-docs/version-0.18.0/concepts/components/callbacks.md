@@ -1,19 +1,18 @@
 ---
-title: "콜백"
-description: "ComponentLink와 콜백을 소개합니다."
+title: "Callbacks"
+description: "ComponentLink and Callbacks"
 ---
 
-## Component's `Scope<_>` API
+The component "link" is the mechanism through which components are able to create callbacks and update themselves.
 
-The component "`Scope`" is the mechanism through which components are able to create callbacks and update themselves 
-using messages. We obtain a reference to this by calling `link()` on the context object passed to the component.
+## ComponentLink API
 
-### `send_message`
+### send_message
 
 Sends a message to the component.
 Messages are handled by the `update` method which determines whether the component should re-render.
 
-### `send_message_batch`
+### send_message_batch
 
 Sends multiple messages to the component at the same time.
 This is similar to `send_message` but if any of the messages cause the `update` method to return `true`,
@@ -21,7 +20,7 @@ the component will re-render after all messages in the batch have been processed
 
 If the given vector is empty, this function doesn't do anything.
 
-### `callback`
+### callback
 
 Create a callback that will send a message to the component when it is executed.
 Under the hood, it will call `send_message` with the message returned by the provided closure.
@@ -30,46 +29,18 @@ There is a different method called `callback_once` which accepts a `FnOnce` inst
 You should use this with care though, as the resulting callback will panic if executed more than once.
 
 ```rust
-use yew::{html, Component, Context, Html};
+// Create a callback that accepts some text and sends it to the component as the `Msg::Text` message variant.
+let cb = link.callback(|text: String| Msg::Text(text));
 
-enum Msg {
-    Text(String),
-}
+// The previous line is needlessly verbose to make it clearer.
+// It can be simplified it to this:
+let cb = link.callback(Msg::Text);
 
-struct Comp;
-
-impl Component for Comp {
-
-    type Message = Msg;
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        // Create a callback that accepts some text and sends it 
-        // to the component as the `Msg::Text` message variant.
-        // highlight-next-line
-        let cb = ctx.link().callback(|text: String| Msg::Text(text));
-            
-        // The previous line is needlessly verbose to make it clearer.
-        // It can be simplified it to this:
-        // highlight-next-line
-        let cb = ctx.link().callback(Msg::Text);
-            
-        // Will send `Msg::Text("Hello World!")` to the component.
-        // highlight-next-line
-        cb.emit("Hello World!".to_owned());
-
-        html! {
-            // html here
-        }
-    }
-}
+// Will send `Msg::Text("Hello World!")` to the component.
+cb.emit("Hello World!".to_owned());
 ```
 
-### `batch_callback`
+### batch_callback
 
 Create a callback that will send a batch of messages to the component when it is executed.
 The difference to `callback` is that the closure passed to this method doesn't have to return a message.
@@ -98,31 +69,11 @@ They have an `emit` function that takes their `<IN>` type as an argument and con
 A simple use of a callback might look something like this:
 
 ```rust
-use yew::{html, Component, Context, Html};
+use yew::html;
 
-enum Msg {
-    Clicked,
-}
-
-struct Comp;
-
-impl Component for Comp {
-
-    type Message = Msg;
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
-
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        // highlight-next-line
-        let onclick = ctx.link().callback(|_| Msg::Clicked);
-        html! {
-            // highlight-next-line
-            <button {onclick}>{ "Click" }</button>
-        }
-    }
+let onclick = self.link.callback(|_| Msg::Clicked);
+html! {
+    <button onclick=onclick>{ "Click" }</button>
 }
 ```
 
@@ -131,41 +82,21 @@ The function passed to `callback` must always take a parameter. For example, the
 If you need a callback that might not need to cause an update, use `batch_callback`.
 
 ```rust
-use yew::{html, Component, Context, Html, KeyboardEvent};
+use yew::html;
 
-enum Msg {
-    Submit,
-}
-
-struct Comp;
-
-impl Component for Comp {
-
-    type Message = Msg;
-    type Properties = ();
-
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
+let onkeypress = self.link.batch_callback(|event| {
+    if event.key() == "Enter" {
+        Some(Msg::Submit)
+    } else {
+        None
     }
+});
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        // highlight-start
-        let onkeypress = ctx.link().batch_callback(|event: KeyboardEvent| {
-            if event.key() == "Enter" {
-                Some(Msg::Submit)
-            } else {
-                None
-            }
-        });
-        
-        html! {
-            <input type="text" {onkeypress} />
-        }
-        // highlight-end
-    }
+html! {
+    <input type="text" onkeypress=onkeypress />
 }
 ```
 
 ## Relevant examples
-- [Counter](https://github.com/yewstack/yew/tree/master/examples/counter)
-- [Timer](https://github.com/yewstack/yew/tree/master/examples/timer)
+- [Counter](https://github.com/yewstack/yew/tree/v0.18/examples/counter)
+- [Timer](https://github.com/yewstack/yew/tree/v0.18/examples/timer)

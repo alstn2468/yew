@@ -1,12 +1,11 @@
 ---
-title: "trunk 사용하기"
+title: "Using trunk"
 ---
 
 ## Install
 
 ```bash
-cargo install --locked trunk
-cargo install wasm-bindgen-cli
+cargo install trunk wasm-bindgen-cli
 ```
 
 ## Usage

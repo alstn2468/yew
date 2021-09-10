@@ -1,7 +1,7 @@
 ---
 title: "HTML"
-sidebar_label: 소개
-description: "HTML과 SVG 생성을 위한 프로시저 매크로를 소개합니다."
+sidebar_label: Introduction
+description: "The procedural macro for generating HTML and SVG"
 ---
 
 The `html!` macro allows you to write HTML and SVG code declaratively. It is similar to JSX
@@ -32,17 +32,17 @@ use yew::html;
 
 html! {
   <div id="my_div"></div>
-};
+}
 ```
 
 <!--Invalid-->
 
-```rust ,compile_fail
+```rust
 use yew::html;
 
 html! {
   <div id="my_div"> // <- MISSING CLOSE TAG
-};
+}
 ```
 
 <!--Self-closing-->
@@ -52,17 +52,17 @@ use yew::html;
 
 html! {
   <input id="my_input" />
-};
+}
 ```
 
 <!--Invalid-->
 
-```rust ,compile_fail
+```rust
 use yew::html;
 
 html! {
   <input id="my_input"> // <- MISSING SELF-CLOSE
-};
+}
 ```
 
 <!--END_DOCUSAURUS_CODE_TABS-->
@@ -96,7 +96,7 @@ html! {
             </select>
         </div>
     </div>
-};
+}
 ```
 
 <!--SVG-->
@@ -120,7 +120,7 @@ html! {
             </filter>
         </defs>
     </svg>
-};
+}
 ```
 
 <!--END_DOCUSAURUS_CODE_TABS-->

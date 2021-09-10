@@ -1,6 +1,6 @@
 ---
-title: "클래스"
-description: "클래스를 다룰 수 있는 편리한 매크로를 소개합니다."
+title: "Classes"
+description: "A handy macro to handle classes"
 ---
 
 ## Classes
@@ -26,8 +26,8 @@ is that every expression implements `Into<Classes>`.
 use yew::{classes, html};
 
 html! {
-    <div class={classes!("container")}></div>
-};
+  <div class=classes!("container")></div>
+}
 ```
 
 <!--Multiple-->
@@ -36,8 +36,8 @@ html! {
 use yew::{classes, html};
 
 html! {
-  <div class={classes!("class-1", "class-2")}></div>
-};
+  <div class=classes!("class-1", "class-2")></div>
+}
 ```
 
 <!--String-->
@@ -48,8 +48,8 @@ use yew::{classes, html};
 let my_classes = String::from("class-1 class-2");
 
 html! {
-  <div class={classes!(my_classes)}></div>
-};
+  <div class=classes!(my_classes)></div>
+}
 ```
 
 <!--Optional-->
@@ -58,8 +58,8 @@ html! {
 use yew::{classes, html};
 
 html! {
-  <div class={classes!(Some("class"))} />
-};
+  <div class=classes!(Some("class")) />
+}
 ```
 
 <!--Vector-->
@@ -68,8 +68,8 @@ html! {
 use yew::{classes, html};
 
 html! {
-  <div class={classes!(vec!["class-1", "class-2"])}></div>
-};
+  <div class=classes!(vec!["class-1", "class-2"])></div>
+}
 ```
 
 <!--Array-->
@@ -80,8 +80,8 @@ use yew::{classes, html};
 let my_classes = ["class-1", "class-2"];
 
 html! {
-  <div class={classes!(my_classes.as_ref())}></div>
-};
+  <div class=classes!(&my_classes)></div>
+}
 ```
 
 <!--END_DOCUSAURUS_CODE_TABS-->
@@ -89,13 +89,10 @@ html! {
 ## Components that accept classes
 
 ```rust
-use yew::{
-    classes, html, Children, Classes, Component,
-    Context, Html, Properties
-};
 use boolinator::Boolinator;
+use yew::{classes, html, Children, Classes, Component, Html, Properties};
 
-#[derive(PartialEq, Properties)]
+#[derive(Clone, Properties)]
 struct Props {
     #[prop_or_default]
     class: Classes,
@@ -103,29 +100,28 @@ struct Props {
     children: Children,
 }
 
-struct MyComponent;
+struct MyComponent {
+    props: Props,
+}
 
 impl Component for MyComponent {
-    type Message = ();
     type Properties = Props;
 
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
-    }
+    // ...
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self) -> Html {
         let Props {
             class,
             fill,
             children,
-        } = &ctx.props();
+        } = &self.props;
         html! {
             <div
-                class={classes!(
+                class=classes!(
                     "my-container-class",
                     fill.as_some("my-fill-class"),
                     class.clone(),
-                )}
+                )
             >
                 { children.clone() }
             </div>
