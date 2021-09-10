@@ -4,12 +4,12 @@ title: "스타터 템플릿"
 
 ## `trunk`
 
-- [Minimal Template](https://github.com/yewstack/yew-trunk-minimal-template)은 시작할 수 있도록 Trunk로 구축된 작은 do플리케이션 입니다.
+- [Minimal Template](https://github.com/yewstack/yew-trunk-minimal-template)은 시작할 수 있도록 Trunk로 구축된 작은 애플리케이션 입니다.
 
 ## `wasm-pack`
 
 - [Minimal Template](https://github.com/yewstack/yew-wasm-pack-minimal)은 `wasm-pack`과
-  `rollup`을 사용하여 do플리케이션 및 이를 서비스할 자체 서버를 구축합니다. 더 추가할 것은 없습니다.
+  `rollup`을 사용하여 애플리케이션 및 이를 서비스할 자체 서버를 구축합니다. 더 추가할 것은 없습니다.
 
 - [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template)은 개발을 간소화 하기 위해 Webpack으로 `wasm-pack` 과
   [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin)을 사용합니다.
