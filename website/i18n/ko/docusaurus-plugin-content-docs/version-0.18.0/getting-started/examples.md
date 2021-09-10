@@ -1,11 +1,11 @@
 ---
-title: "Examples"
+title: "예제"
 ---
 
-The Yew repository is chock-full of [examples] \(in various states of maintenance\).
-We recommend perusing them to get a feel for how to use different features of the framework.
-We also welcome Pull Requests and issues for when they inevitably get neglected and need some ♥️
+Yew 리포지트리는 [examples] 로 꽉 차 있습니다. \(각기 다른 수준의 유지 보수 수준을 가지고 있습니다.\)
+저희는 프레임워크의 다양한 기능을 사용하는 법에 대해 감을 잡기 위해 정독하는 것을 추천합니다.
+예제들이 방치되어 사랑으로 보듬어 줘야 한다면 Pull Request 나 issue 를 환영합니다♥.
 
-For more details including a list of examples, refer to the [README][examples].
+예제 목록을 포함하는 더 자세한 내용은 [README][examples] 에서 확인하세요.
 
 [examples]: https://github.com/yewstack/yew/tree/v0.18/examples
