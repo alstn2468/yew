@@ -9,9 +9,9 @@ title: "스타터 템플릿"
 ## `wasm-pack`
 
 - [Minimal Template](https://github.com/yewstack/yew-wasm-pack-minimal)은 `wasm-pack`과
-  `rollup`을 사용하여 애플리케이션 및 이를 서비스할 자체 서버를 구축합니다. 더 추가할 것은 없습니다.
+  `rollup`을 사용하여 에플리케이션 및 이를 서비스할 자체 서버를 구축합니다. 더 추가할 것은 없습니다.
 
-- [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template)은 Webpack이 개발을 간소화 하기 위해 `wasm-pack` 과
+- [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template)은 Webpack을 이용하여 개발을 간소화 하기 위해 `wasm-pack` 과
   [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin)을 사용합니다.
 
 
@@ -19,7 +19,7 @@ title: "스타터 템플릿"
 그리고 프로그램의 엔트리 포인트는 `#[wasm_bindgen(start)]`속성과 함께 명시되어 있습니다.
 
 `Cargo.toml` 또한 crate의 타입이 "cdylib"인지 명시해야 합니다.
-
+`
 ```toml
 [package]
 name = "yew-app"
