@@ -1,23 +1,24 @@
 ---
-title: "Starter templates"
+title: "스타터 템플릿"
 ---
 
 ## `trunk`
 
-- [Minimal Template](https://github.com/yewstack/yew-trunk-minimal-template) - A small application built with Trunk to get you started.
+- [Minimal Template](https://github.com/yewstack/yew-trunk-minimal-template)은 시작할 수 있도록 Trunk로 구축된 작은 애플리케이션 입니다.
 
 ## `wasm-pack`
 
-- [Minimal Template](https://github.com/yewstack/yew-wasm-pack-minimal) - Uses `wasm-pack` and
-  `rollup` to build your application, and your own server to serve it. No bells or whistles here.
+- [Minimal Template](https://github.com/yewstack/yew-wasm-pack-minimal)은 `wasm-pack`과
+  `rollup`을 사용하여 애플리케이션 및 이를 서비스할 자체 서버를 구축합니다. 더 추가할 것은 없습니다.
 
-- [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template) - Uses `wasm-pack` and the
-  [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin) for Webpack to streamline development.
+- [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template)은 `wasm-pack` 과
+  [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin)을 사용해서 Webpack을 이용한 개발을 간소화 합니다.
 
-Unlike other tools, `wasm-pack` forces you to use a `lib`, not a `bin` crate,
-and the entry-point to your program is annotated with a `#[wasm_bindgen(start)]` attribute.
 
-Your `Cargo.toml` also should specify that your crate's type is a "cdylib".
+다른 도구들과는 다르게 `wasm-pack`은 `bin` crate가 아닌 `lib` crate를 사용하도록 강제합니다.
+그리고 프로그램의 엔트리 포인트는 `#[wasm_bindgen(start)]`속성과 함께 명시되어 있습니다.
+
+`Cargo.toml` 또한 crate의 타입이 "cdylib"인지 명시해야 합니다.
 
 ```toml
 [package]
@@ -27,8 +28,8 @@ authors = ["Yew App Developer <name@example.com>"]
 edition = "2018"
 
 [lib]
-# You should include "rlib" (the default crate type) otherwise your crate can't be used as a Rust library
-# which, among other things, breaks unit testing
+# "rlib"(crate의 기본 타입)을 포함하여야만 crate가 Rust library로 사용될 수 있습니다.
+# 다른 무엇보다도, 유닛 테스트를 위반합니다.
 crate-type = ["rlib", "cdylib"]
 
 [dependencies]
@@ -41,5 +42,5 @@ wasm-bindgen = "0.2"
 
 ## Other templates
 
-- [Parcel Template](https://github.com/spielrs/yew-parcel-template) - Created by a community member
-  and uses [Parcel](https://parceljs.org/)
+- [Parcel Template](https://github.com/spielrs/yew-parcel-template)은 커뮤니티 구성원에 의해 작성되었으며, 
+  [Parcel](https://parceljs.org/)을 사용합니다.
