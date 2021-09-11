@@ -3,69 +3,63 @@ title: "동작 방식"
 description: "프레임워크에 대한 낮은 수준의 세부정보를 소개합니다."
 ---
 
-# Low-level library internals
+# 라이브러리 저수준 내부 구조
 
-## Under the hood of the `html!` macro
+## `html!` 매크로 뜯어보기
 
-The `html!` macro turns code written in a custom HTML-like syntax into valid Rust code. Using this
-macro is not necessary for developing Yew applications, but it is recommended. The code generated 
-by this macro makes use of the public Yew library API which can be used directly if you wish. Note
-that some methods used are undocumented intentionally to avoid accidental misuse. With each
-update of `yew-macro`, the generated code will be more efficient and handle any breaking changes
-without many (if any) modifications to the `html!` syntax.
+`html!` 매크로는 HTML과 비슷한 문법을 가진 커스텀 코드를 유효한 Rust 코드로 변환시켜줍니다.
+이 매크로를 사용하는 것은 Yew 애플리케이션을 사용하는데 있어 필수는 아니지만 추천하고 있습니다.
+이 매크로를 통해 생성된 코드는 퍼블릭 Yew 라이브러리 API를 활용하며 필요하다면 API를 직접 호출 하실 수 있습니다.
+몇몇 메소드들은 의도되지 않은 오용을 피하기 위해 일부로 문서화하지 않았다는 것에 주의하세요.
+`yew-macro`가 업데이트될 때마다 자동 생성되는 코드는 더 효율적이게 될 것이고 `html!` 문법을 수정할 필요 없이
+breaking changes 를 해결할 것입니다.
 
-Because the `html!` macro allows you to write code in a declarative style, your UI layout code will
-closely match the HTML that is generated to the page. This becomes increasingly useful as your
-application gets more interactive and your codebase gets larger. Rather than manually writing the
-all of the code to manipulate the DOM yourself, the macro will handle it for you.
 
-Using the `html!` macro can feel pretty magic, but it has nothing to hide. If you're curious about
-how it works, try expanding the `html!` macro calls in your program. There's a useful command called
-`cargo expand` which allows you to see the expansion of Rust macros. `cargo expand` isn't shipped with
-`cargo` by default so you'll need to install it with `cargo install cargo-expand` if you haven't
-already.
+`html!`매크로는 선언형 스타일로 코드를 작성하기 때문에 UI 레이아웃 코드는 페이지에 생성되는 HTML코드와
+거의 일치합니다. 이는 애플리케이션의 상호작용성이나 코드 베이스가 커질수록 더 유용합니다.
+DOM을 조작하는 코드를 직접 작성할 필요 없이 매크로가 직접 해결해줍니다.
 
-Note that when viewing expanded macro code, you're likely to encounter unusually verbose code. The
-reason is because generated code can sometimes clash with other code in an application. In order
-to prevent issues, `proc_macro` "hygiene" is adhered to. Some examples include:
+`html!` 매크로를 사용하는 것은 꽤 마법같을 겁니다. 하지만 숨기지 않습니다. 매크로가 어떻게 작동하는지 궁금하다면
+프로그램에서 `html!` 매크로를 확장해보세요. `cargo expand` 명령어를 활용하면 Rust 매크로 확장 코드를 확인할 수 있습니다.
+`cargo expand`는 기본으로 내장되어 있지 않기 때문에 설치하지 않았다면 `cargo install cargo-expand` 명령어를 실행해야 합니다.
 
-1. Instead of using `yew::<module>` the macro generates `::yew::<module>` to make sure that the
-Yew package is referenced correctly. This is also why `::alloc::vec::Vec::new()` is called instead
-of just `Vec::new()`.
-2. Due to potential trait method name collisions, `<Type as Trait>` is used to make sure that we're using items from the
+매크로 확장 코드를 확인하실 때는 평소보다 긴 코드를 보게 될 것입니다.
+이는 생성된 코드가 애플리케이션 내 다른 코드와 충돌할 수 있기 때문입니다.
+이러한 문제를 피하기 위해선 `proc_macro` "위생" 규칙을 지켜야합니다. 예를 들면:
 
-## What is a virtual DOM?
+1. Yew 패키지를 정확하게 참조하기 위해 매크로는 `yew::<module>` 대신 `::yew::<module>`를 생성합니다.
+이것이 `Vec::new()` 대신 `::alloc::vec::Vec::new()`가 호출되는 이유이기도 합니다.
+2. 잠재적인 trait 이름 충돌을 피하기 위해 `<Type as Trait>`를 사용하여 올바른 Yew trait를 사용합니다.
 
-The DOM ("document object model") is a representation of the HTML content that is managed by the browser
-for your web page. A "virtual" DOM is simply a copy of the DOM that is held in application memory. Managing
-a virtual DOM results in a higher memory overhead, but allows for batching and faster reads by avoiding
-or delaying the use of browser APIs.
+## 가상 DOM 이 무엇인가요?
 
-Having a copy of the DOM in memory can be really helpful for libraries which promote the use of
-declarative UIs. Rather than needing specific code for describing how the DOM should be modified
-in response to a user event, the library can use a generalized approach with DOM "diffing". When a Yew
-component is updated and wants to change how it is rendered, the Yew library will build a second copy
-of the virtual DOM and directly compare to a virtual DOM which mirrors what is currently on screen.
-The "diff" (or difference) between the two can be broken down into incremental updates and applied in
-a batch with browser APIs. Once the updates are applied, the old virtual DOM copy is discarded and the
-new copy is saved for future diff checks.
+DOM ("document object model") 은 HTML 콘텐츠의 표현 방식이며 웹 페이지의 브라우저가 관리합니다.
+"가상" DOM은 단순히 DOM을 애플리케이션 메모리로 옮겨놓은 DOM의 복사본입니다.
+가상 DOM을 관리하는 것은 더 큰 메모리 오버헤드를 야기하지만 브라우저 API 사용을 피하거나 지연시켜
+묶음 처리나 빠른 읽기 속도를 가능케 합니다. 
 
-This "diff" algorithm can be optimized over time to improve the performance of complex applications.
-Since Yew applications are run with WebAssembly, we believe that Yew has a competitive edge to adopt
-more sophisticated algorithms in the future.
+DOM의 복사본을 메모리에 담아두는 것은 선언적 UI 사용을 장려하는 라이브러리에게 상당히 유용합니다.
+유저 이벤트에 대응하여 DOM이 어떻게 수정되어야 할 지 정하는 구체적인 코드를 요구하는 대신
+라이브러리는 DOM "diff"를 활용하여 좀 더 보편화된 접근 방식을 사용할 수 있습니다.
+Yew 컴포넌트가 업데이트 되어 어떻게 렌더링되는지 바꾸려 할 때 Yew 라이브러리는 가상 DOM의 두 번째 복사본을 만들고
+현재 화면에 있는것을 표현하는 가상 DOM과 직접적으로 비교합니다.
+두 가상 DOM의 "diff"(비교본)은 부분적인 업데이트로 나눠지며 브라우저 API에 묶어서 적용할 수 있습니다.
+업데이트가 적용되고 나면 기존 가상 DOM 복사본은 버려지고 새 복사본이 다음 비교를 위해 저장됩니다.
 
-The Yew virtual DOM is not exactly one-to-one with the browser DOM. It also includes "lists" and 
-"components" for organizing DOM elements. A list can simply be an ordered list of elements but can
-also be much more powerful. By annotating each list element with a "key", application developers
-can help Yew make additional optimizations to ensure that when a list changes, the least amount
-of work is done to calculate the diff update. Similarly, components provide custom logic to
-indicate whether a re-render is required to help with performance.
+복잡한 애플리케이션의 성능을 향상시키기 위해 "diff" 알고리즘은 시간이 자나면서 최적화될 수 있습니다.
+Yew 애플리케이션은 WebAssembly로 돌아가기 때문에 저희는 Yew가 미래에 더 정교한 알고리즘을 도입하는데 강점을 가지고 있다고 생각합니다.
 
-## Yew scheduler and component-scoped event loop
+Yew 가상 DOM은 브라우저 DOM과 일대일로 대응되지 않습니다. DOM 요소를 관리하는데 사용되는 리스트나 컴포넌트도 가지고 있습니다.
+리스트는 단순히 순서 있는 요소 리스트로 사용될 수 있지만 더 강력하게 사용할 수 있습니다.
+애플리케이션 개발자들은 각 리스트 요소를 "키"로 장식하여 리스트가 변경될 때
+Yew가 diff 업데이트 계산을 최소한으로 할 수 있도록 도울 수 있습니다.
+이와 유사하게 컴포넌트는 커스텀 로직을 제공하여 렌더링이 필요한지 표현함으로 성능을 개선할 수 있습니다.
 
-*Contribute to the docs – explain how `yew::scheduler` and `yew::html::scope` work in depth*
+## Yew 스케쥴러와 컴포넌트 단위 이벤트 루프
 
-## Further reading
-* [More information about macros from the Rust Book](https://doc.rust-lang.org/stable/book/ch19-06-macros.html)
-* [More information about `cargo-expand`](https://github.com/dtolnay/cargo-expand)
-* [The API documentation for `yew::virtual_dom`](https://docs.rs/yew/*/yew/virtual_dom/index.html)
+*문서화에 기여하세요 – `yew::scheduler`와 `yew::html::scope` 어떻게 작동하는지 깊게 설명하세요*
+
+## 추가 자료
+* [Rust book에서 가져온 매크로에 대한 더 많은 정보](https://doc.rust-lang.org/stable/book/ch19-06-macros.html)
+* [`cargo-expand`에 대한 더 많은 정보](https://github.com/dtolnay/cargo-expand)
+* [`yew::virtual_dom`의 API 문서](https://docs.rs/yew/*/yew/virtual_dom/index.html)
