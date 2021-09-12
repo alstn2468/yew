@@ -34,7 +34,7 @@ enum Msg {
 }
 
 struct Model {
-    // `ComponentLink`는 컴포넌트들의 참조와 같습니다.
+    // `ComponentLink`는  컴포넌트에 대한 참조와 같습니다.
     // 컴포넌트로 메시지를 보내는 데 사용할 수 있습니다.
     link: ComponentLink<Self>,
     value: i64,
@@ -55,7 +55,7 @@ impl Component for Model {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
-                // 이 값이 바뀌었으므로
+                // value가 업데이트되었으므로
                 // re-render 하여 페이지에 보이도록 합니다.
                 true
             }
@@ -84,9 +84,9 @@ fn main() {
 ```
 
 이 템플릿은 `Model`이라는 루트 `컴포넌트`를 설정하며, 이 버튼을 클릭하면 자동으로 업데이트되는 버튼을 표시합니다.
-애플리케이션을 실행시키고 페이지의 `<body>`태그에 마운트하는 `main()`안의 `yew::start_app::<Model>()`을 각별히 유의해야 합니다.
+애플리케이션을 실행시키고 페이지의 `<body>`태그에 적용시키는 `main()`안의 `yew::start_app::<Model>()`을 각별히 유의해야 합니다.
 
-만약 애플리케이션을 동적속성과 함께 실행하고 싶다면,다음을 이용할 수 있습니다.
+만약 애플리케이션을 동적속성과 함께 실행하고 싶다면, 아래와 같이 작성하면 됩니다.
 
 `yew::start_app_with_props::<Model>(..)`.
 
@@ -104,7 +104,7 @@ fn main() {
 
 ## 애플리케이션 실행
 
-아직 [Trunk](https://github.com/thedodd/trunk)를 설치하지 않으셨다면, 설치를 해야 합니다.
+아직 [Trunk](https://github.com/thedodd/trunk)를 설치하지 않으셨다면, 지금 설치하셔야 합니다.
 
 ```bash
 cargo install trunk wasm-bindgen-cli
