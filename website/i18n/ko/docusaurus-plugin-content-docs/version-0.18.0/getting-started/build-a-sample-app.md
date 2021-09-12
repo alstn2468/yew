@@ -102,7 +102,7 @@ fn main() {
 </html>
 ```
 
-## Run your app
+## 애플리케이션 실행
 
 아직 [Trunk](https://github.com/thedodd/trunk)를 설치하지 않으셨다면, 설치를 해야 합니다.
 
@@ -117,7 +117,7 @@ Rustup을 이용하여 설치하려면:
 rustup target add wasm32-unknown-unknown
 ```
 
-이제 해야 할 일은 다음을 실행하는 것입니다.
+이제 남은 것은 다음을 실행하는 것입니다.
 
 ```bash
 trunk serve
@@ -127,7 +127,7 @@ trunk serve
 
 
 
-## Troubleshooting
+## 문제 해결
 
 * Trunk 설치 실패:
   openssl 개발 패키지가 설치되어 있는지 확인합니다.
