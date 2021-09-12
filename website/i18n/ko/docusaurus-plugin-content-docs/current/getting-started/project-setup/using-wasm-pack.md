@@ -2,7 +2,7 @@
 title: "wasm-pack 사용하기"
 ---
 
-이 도구는 WebAssembly 애플리케이션을 구축하기 위해 Rust / Wasm Working Group에서 만들었습니다.코드를 `npm` 모듈로 패키징하는 것을 지원하며 기존 JavaScript 애플리케이션과 쉽게 통합할 수 있도록 함께 제공되는 [Webpack 플러그인](https://github.com/wasm-tool/wasm-pack-plugin)이 있습니다. 자세한 내용은 ['wasm-pack' 문서](https://rustwasm.github.io/docs/wasm-pack/introduction.html)에서 확인할 수 있습니다.
+이 도구는 WebAssembly 애플리케이션을 구축하기 위해 Rust / Wasm Working Group에서 만들었습니다.코드를 `npm` 모듈로 패키징하는 것을 지원하며 기존 JavaScript 애플리케이션과 쉽게 통합할 수 있도록 함께 제공되는 [Webpack 플러그인](https://github.com/wasm-tool/wasm-pack-plugin)이 있습니다. 자세한 내용은 [`wasm-pack` 문서](https://rustwasm.github.io/docs/wasm-pack/introduction.html)에서 확인할 수 있습니다.
 
 :::참고
 `wasm-pack`을 사용하려면 `cdylib`를 포함하도록 명시적으로 crate-type을 설정해야 합니다.
@@ -30,15 +30,15 @@ wasm-pack build --target web
 
 ## 번들링하기
 
-rollup.js에 대한 자세한 내용은 이 [가이드](https://rollupjs.org/guide/en/#quick-start)를 확인할 수 있습니다.
+rollup.js에 대한 자세한 내용은 이 [가이드](https://rollupjs.org/guide/en/#quick-start)에서 확인할 수 있습니다.
 
 ```bash
 rollup ./main.js --format iife --file ./pkg/bundle.js
 ```
 
-rollup.js와 같은 번들러를 사용할 때 `--target web`을 생략할 수 있습니다.
+rollup.js와 같은 번들러를 사용하는 경우 `--target web`을 생략할 수 있습니다.
 
-## 개발하기
+## 실행하기
 
 선호하는 서버를 자유롭게 사용할 수 있습니다. 여기서는 간단한 Python 서버를 사용하여 빌드된 앱을 제공합니다.
 
