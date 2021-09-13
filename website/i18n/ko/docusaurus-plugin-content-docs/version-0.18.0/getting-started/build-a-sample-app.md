@@ -34,7 +34,7 @@ enum Msg {
 }
 
 struct Model {
-    // `ComponentLink`는  컴포넌트에 대한 참조와 같습니다.
+    // `ComponentLink`는 컴포넌트에 대한 참조와 같습니다.
     // 컴포넌트로 메시지를 보내는 데 사용할 수 있습니다.
     link: ComponentLink<Self>,
     value: i64,
