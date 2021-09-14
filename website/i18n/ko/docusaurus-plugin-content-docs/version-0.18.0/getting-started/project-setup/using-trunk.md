@@ -10,9 +10,9 @@ cargo install trunk wasm-bindgen-cli
 
 ## 사용법
 
-Trunk를 이용하여 Yew 애플리케이션을 구축하는 간단한 가이드 ["간단한 앱 구축하기"](../build-a-sample-app.md)를 확인해 보세요.
+Trunk를 이용하여 Yew 애플리케이션을 빌드하는 간단한 가이드 ["간단한 앱 빌드하기"](../build-a-sample-app.md)를 확인해 보세요.
 
-다양한 [예시](https://github.com/yewstack/yew/tree/master/examples)를 참고하여 Trunk로 빌드되어 실행되는 애플리케이션들을 확인하실 수 있습니다. 
+Trunk를 통해 Yew 애플리케이션이 빌드되는 과정은 다음 [예시](https://github.com/yewstack/yew/tree/master/examples)들에서도 확인할 수 있습니다.
 
 Trunk는 일종의 설정 파일 역할을 하는 `index.html`파일을 기반으로 애플리케이션을 구축합니다.
 이 도구는 wasm-pack과 달리, Trunk는 애플리케이션 빌드 도구로써 설계되었습니다.
@@ -31,7 +31,7 @@ Trunk는 일종의 설정 파일 역할을 하는 `index.html`파일을 기반�
 ```
 
 Trunk CLI는 여러 유용한 명령어들을 제공하지만 개발 단계에서는 `trunk serve`가 당연 가장 유용한 명령어입니다.
-변경 사항을 감지하면 애플리케이션을 자동으로 재구축하는 로컬 서버를 실행할 것 입니다.
+변경 사항을 감지하면 애플리케이션을 자동으로 다시 빌드하는 로컬 서버를 실행할 것 입니다.
 
 애플리케이션을 배포할 준비가 되었다면, `trunk build --release`를 실행하기만 하면 됩니다.
 
