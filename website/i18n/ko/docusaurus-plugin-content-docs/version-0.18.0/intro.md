@@ -37,11 +37,13 @@ WebAssembly\(_Wasm_\)는 Rust에서 컴파일될 수 있는 이식성 높은 저
 
 #### 아하! 근데 왜 Rust인가요?
 
-Rust는 미칠듯이 빠르며 풍부한 타입 체계와 소유권 모델을 사용하므로 안정적입니다. 물론 입문하기 어려울 수 있지만 충분히 배워볼 가치는 있습니다. Rust는 스택오버플로우의 개발자 설문에서 5년 연속으로 가장 사랑받는 프로그래밍 언어로 선정되었습니다:
+Rust는 미칠듯이 빠르며 풍부한 타입 체계와 소유권 모델을 사용하므로 안정적입니다. 물론 입문하기 어려울 수 있지만 충분히 배워볼 가치는 있습니다. Rust는 스택오버플로우의 개발자 설문에서 6년 연속으로 가장 사랑받는 프로그래밍 언어로 선정되었습니다:
 [2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted),
 [2017](https://insights.stackoverflow.com/survey/2017#most-loved-dreaded-and-wanted),
 [2018](https://insights.stackoverflow.com/survey/2018#technology-_-most-loved-dreaded-and-wanted-languages),
-[2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-languages), [2020](https://insights.stackoverflow.com/survey/2020#most-loved-dreaded-and-wanted).
+[2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-languages),
+[2020](https://insights.stackoverflow.com/survey/2020#most-loved-dreaded-and-wanted),
+[2021](https://insights.stackoverflow.com/survey/2021/#technology-most-loved-dreaded-and-wanted).
 
 또한 Rust는 풍부한 타입 체계와 소유권 모델을 통해 개발자들이 더 안전한 코드를 작성할 수 있도록 도와줍니다. JavaScript 코드에서는 찾기 힘들던 경쟁상태의 버그들과는 작별하세요! Rust에서는 앱이 구동하기도 전에 대부분의 버그들이 컴파일러에 의해 잡힐 것입니다. 그리고 걱정마세요. 만약 에러가 발생하더라도 브라우저 콘솔에 에러가 발생한 코드의 위치에 대해 세부적인 기록이 남을 것입니다.
 
