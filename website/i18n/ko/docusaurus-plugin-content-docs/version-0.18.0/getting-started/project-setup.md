@@ -20,14 +20,14 @@ Yew가 지원하는 가장 낮은 Rust 버전(MSRV)은 `1.49.0`입니다. 그 �
 
 WebAssembly와 JavaScript를 함께 사용하기 위해서는 별도의 도구를 추가해야 합니다.
 어떤 도구를 선택했는지에 따라 개발과 패키징 작업이 훨씬 간편해질 수 있습니다.
-어플리케이션의 `.wasm` 바이너리를 브라우저에 로드하고 실행하는 데 필요한 모든 JavaScript 코드를 생성해주는 기능까지 제공됩니다.
+애플리케이션의 `.wasm` 바이너리를 브라우저에 로드하고 실행하는 데 필요한 모든 JavaScript 코드를 생성해주는 기능까지 제공됩니다.
 
 ### [**`trunk`**](https://github.com/thedodd/trunk/)
 
-Yew 어플리케이션 빌드를 위해 만들어진 도구입니다.
-모든 `wasm-bindgen` 기반 어플리케이션을 빌드할 수 있으며, rollup.js의 구조에 영향을 받았습니다.
+Yew 애플리케이션 빌드를 위해 만들어진 도구입니다.
+모든 `wasm-bindgen` 기반 애플리케이션을 빌드할 수 있으며, rollup.js의 구조에 영향을 받았습니다.
 Trunk를 사용하면 빌드를 위해 Node.js를 설치하거나 JavaScript 코드를 작성할 필요가 완전히 사라집니다.
-어플리케이션을 위한 에셋들을 번들링해주면서 Sass 컴파일러까지 제공됩니다.
+애플리케이션을 위한 에셋들을 번들링해주면서 Sass 컴파일러까지 제공됩니다.
 
 해당 문서의 모든 예시 프로젝트들도 Trunk를 사용하고 있습니다.
 
@@ -61,4 +61,4 @@ WebAssembly 패키징을 위해 Rust / Wasm Working Group에서 개발한 CLI �
 | 지원되는 타겟             | <ul><li><code>wasm32-unknown-unknown</code></li></ul>      | <ul><li><code>wasm32-unknown-unknown</code></li></ul>                                                  | <ul> <li><code>wasm32-unknown-unknown</code></li> <li><code>wasm32-unknown-emscripten</code></li> <li><code>asmjs-unknown-emscripten</code></li> </ul> |
 | `web-sys`                 | 호환됨                                                     | 호환됨                                                                                                 | 호환되지 않음                                                                                                                                          |
 | `stdweb`                  | 호환되지 않음                                              | 호환됨                                                                                                 | 호환됨                                                                                                                                                 |
-| 사용 예시                 | [샘플 어플리케이션](./build-a-sample-app.md)               | [스타터 템플릿](https://github.com/yewstack/yew-wasm-pack-minimal)                                     | `yew-stdweb` 예시를 위한 [빌드 스크립트](https://www.github.com/yewstack/yew/tree/master/packages/yew-stdweb/examples)                                 |
+| 사용 예시                 | [샘플 애플리케이션](./build-a-sample-app.md)               | [스타터 템플릿](https://github.com/yewstack/yew-wasm-pack-minimal)                                     | `yew-stdweb` 예시를 위한 [빌드 스크립트](https://www.github.com/yewstack/yew/tree/master/packages/yew-stdweb/examples)                                 |
