@@ -5,7 +5,7 @@ slug: /
 
 ## Yew란 무엇인가요?
 
-**Yew**는 [WebAssembly](https://webassembly.org/)를 통해 멀티쓰레드 기반의 프론트엔드 웹 애플리케이션을 개발하기 위한 현대적인 [Rust](https://www.rust-lang.org/) 프레임워크입니다.
+**Yew**는 현대적인 [Rust](https://www.rust-lang.org/) 프레임워크로 [WebAssembly](https://webassembly.org/)를 활용한 멀티쓰레드 기반의 프론트엔드 웹 애플리케이션 개발을 지원합니다.
 
 - **컴포넌트 기반**의 프레임워크이므로 사용자와 상호작용하는 UI를 쉽게 만들 수 있습니다. [React](https://reactjs.org/)나
   [Elm](https://elm-lang.org/)과 같은 프레임워크가 익숙한 개발자들은 Yew가 낯설지 않을 것입니다.
