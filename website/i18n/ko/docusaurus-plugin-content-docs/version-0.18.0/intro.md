@@ -51,5 +51,5 @@ Rust는 미칠듯이 빠르며 풍부한 타입 체계와 소유권 모델을 �
 
 저희는 다른 프로젝트들과 아이디어를 나누고 싶고, Rust라는 신기술의 잠재력을 발휘하기 위해 협력할 수 있다고 믿습니다. 만약 Yew가 별로라면 다음 프로젝트들은 어떨까요?
 
-- [Percy](https://github.com/chinedufn/percy) - _"Rust와 WebAssembly를 활용하여 클라이언트와 서버에서 모두 동작하는 웹 애플리키에션을 개발하기 위한 모듈식 툴킷"_
+- [Percy](https://github.com/chinedufn/percy) - _"Rust와 WebAssembly를 활용하여 클라이언트와 서버에서 모두 동작하는 웹 애플리케이션을 개발하기 위한 모듈식 툴킷"_
 - [Seed](https://github.com/seed-rs/seed) - _"웹 애플리케이션 개발을 위한 러스트 프레임워크"_
