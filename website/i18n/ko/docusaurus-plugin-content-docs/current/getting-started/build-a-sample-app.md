@@ -2,21 +2,21 @@
 title: "간단한 앱 구축하기"
 ---
 
-## Create Project
+## Project 생성하기
 
-To get started, create a new cargo project.
+새롭게 생성된 폴더를 엽니다.
 
 ```bash
 cargo new yew-app
 ```
 
-Open the newly created directory.
+새롭게 생성된 폴더를 엽니다.
 
 ```bash
 cd yew-app
 ```
 
-## Run a hello world example
+## hello world 예시 실행하기
 
 To verify the Rust environment is setup, run the initial project using the cargo build tool.  After output about the build process, you should see the expected "Hello World" message.
 
@@ -25,13 +25,13 @@ To verify the Rust environment is setup, run the initial project using the cargo
 cargo run
 ```
 
-## Converting the project into a Yew web application
+## 프로젝트를 Yew 웹 애플리케이션으로 변경하기
 
-To convert this simple command line application to a basic Yew web application, a few changes are needed.
+이 간단한 명령 행 애플리케이션을 기본 Yew 웹 애플리케이션으로 변경하려면 약간의 수정이 필요합니다.
 
-### Update Cargo.toml
+### Cargo.toml 수정하기
 
-Add `yew` to the list of dependencies in the `Cargo.toml` file.
+`Cargo.toml`파일에 'yew'를 추가합니다:
 
 ```toml
 [package]
@@ -44,7 +44,7 @@ edition = "2018"
 yew = "0.17"
 ```
 
-### Update main.rs
+### main.rs 수정하기
 
 We need to generate a template which sets up a root Component called `Model` which renders a button that updates its value when clicked.
 Replace the contents of `src/main.rs` with the following code.
@@ -104,9 +104,9 @@ fn main() {
 }
 ```
 
-### Create index.html
+### index.html 생성하기
 
-Finally, add an `index.html` file in the root directory of your app.
+끝으로 애플리케이션의 루트 폴더에 `index.html`파일을 추가합니다.
 
 ```html
 <!DOCTYPE html>
@@ -118,7 +118,7 @@ Finally, add an `index.html` file in the root directory of your app.
 </html>
 ```
 
-## View your web application
+## 웹 애플리케이션 확인하기
 
 Run the following command to build and serve the application locally.
 
@@ -126,10 +126,11 @@ Run the following command to build and serve the application locally.
 trunk serve
 ```
 
-Trunk will helpfully rebuild your application if you modify any of its files.
+Trunk의 파일이 수정된다면 Trunk는 애플리케이션을 재구축 할것입니다.
 
-## Congratulations
+## 축하합니다
 
-You have now successfully setup your Yew development environment, and built your first web application.
+이제 Yew 개발 환경을 성공적으로 셋업하였고 첫 번째 웹 애플리케이션을 구축했습니다.
 
 Experiment with this application and review the [examples](./examples.md) to further your learning.
+이 애플리케이션을 실험해보고 학문을 [예시](./examples.md)을 검토하여 
