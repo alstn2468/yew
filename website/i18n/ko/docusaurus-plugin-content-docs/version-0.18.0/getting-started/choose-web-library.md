@@ -14,7 +14,7 @@ yew = "0.17"
 yew = { version = "0.17", package = "yew-stdweb" }
 ```
 
-[Rust / Wasm 활동 집단](https://rustwasm.github.io/)가 꾸준히 작업 중이라는 점에서 `web-sys`를 사용하는 것을 권장합니다.
+[Rust / Wasm Working Group](https://rustwasm.github.io/)가 꾸준히 작업 중이라는 점에서 `web-sys`를 사용하는 것을 권장합니다.
 
 :::주의
 Yew는 v0.18부터 `stdweb`에 대한 지원을 중단할 것입니다. 버그는 고쳐질 것이지만 새로운 기능이 추가되지는 않을 것입니다. 자세한 사항은 [#1569](https://github.com/yewstack/yew/issues/1569)을 참고하세요.
@@ -62,8 +62,8 @@ window.alert("hello from wasm!");
   <tbody>
     <tr>
       <td style={{ textAlign: "left" }}>프로젝트 현황</td>
-      <td style={{ textAlign: "left" }}><a href="https://rustwasm.github.io/">Rust / Wasm 활동 집단</a>에 의해 활발하게 유지보수 중인 상황</td>
-      <td style={{ textAlign: "left" }}>8개월 넘게 아무런 깃헙 활동이 없는 상황</td>
+      <td style={{ textAlign: "left" }}><a href="https://rustwasm.github.io/">Rust / Wasm Working Group</a>에 의해 활발하게 유지보수 중</td>
+      <td style={{ textAlign: "left" }}>8개월 넘게 아무런 깃헙 활동이 없음</td>
     </tr>
     <tr>
       <td style={{ textAlign: "left" }}>Web API 지원 범위</td>
@@ -95,7 +95,7 @@ window.alert("hello from wasm!");
       </td>
     </tr>
     <tr>
-      <td style={{ textAlign: "left" }}>지원 대상</td>
+      <td style={{ textAlign: "left" }}>지원되는 타겟</td>
       <td style={{ textAlign: "left" }}>
         <ul>
           <li><code>wasm32-unknown-unknown</code>
