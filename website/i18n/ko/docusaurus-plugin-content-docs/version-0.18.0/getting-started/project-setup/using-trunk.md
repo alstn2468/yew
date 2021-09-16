@@ -10,7 +10,7 @@ cargo install trunk wasm-bindgen-cli
 
 ## 사용법
 
-Trunk를 이용하여 Yew 애플리케이션을 빌드하는 간단한 가이드 ["간단한 앱 빌드하기"](../build-a-sample-app.md)를 확인해 보세요.
+Trunk를 이용하여 Yew 애플리케이션을 빌드하는 간단한 가이드 ["심플 애플리케이션 빌드하기"](../build-a-sample-app.md)를 확인해 보세요.
 
 Trunk를 통해 Yew 애플리케이션이 빌드되는 과정은 다음 [예시](https://github.com/yewstack/yew/tree/master/examples)들에서도 확인할 수 있습니다.
 
