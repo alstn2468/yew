@@ -32,6 +32,6 @@ cargo web start
 * `wasm32-unknown-emscripten`
 * `asmjs-unknown-emscripten`
 
-:::주의
+:::참고
  `*-emscripten` 을 타겟으로 하는 경우, Emscripten SDK를 설치 해야 한다.
 :::
