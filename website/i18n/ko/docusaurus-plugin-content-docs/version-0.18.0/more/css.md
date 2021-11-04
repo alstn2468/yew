@@ -4,24 +4,23 @@ title: "CSS"
 
 &lt;TODO&gt;
 
-A proposal for integrated CSS support can be found here: 
+통합 CSS 지원에 대한 제안은 여기에서 찾을 수 있습니다.
 [https://github.com/yewstack/yew/issues/533](https://github.com/yewstack/yew/issues/533)
 
-This contains a lot of discussion about how to best integrate CSS support into Yew.
+여기에는 CSS 지원을 Yew에 가장 잘 통합하는 방법에 대한 많은 논의가 포함되어 있습니다.
 
-Currently, the approach we've adopted is to encourage developers to build a number of systems, before
-adopting the most popular one.
+현재 우리가 채택한 접근 방식은 개발자가 가장 인기 있는 시스템을 채택하기 전에 여러 시스템을 구축하도록 권장하는 것입니다.
 
-The community are currently developing a number of projects to make it easy to add styles to 
-projects. A few are given below:
+커뮤니티는 현재 프로젝트에 스타일을 쉽게 추가할 수 있도록 여러 프로젝트를 개발하고 있습니다.
+몇 가지 프로젝트가 아래에 있습니다.
 
-* [yew_styles](https://github.com/spielrs/yew_styles) - A styling framework for Yew without any JavaScript dependencies.
-* [yew-mdc](https://github.com/Follpvosten/yew-mdc) - Material Design Components.
-* [muicss-yew](https://github.com/AlephAlpha/muicss-yew) - MUI CSS Components.
-* [Yewtify](https://github.com/yewstack/yewtify) – Implements the features provided by the Vuetify framework in Yew.
+* [yew_styles](https://github.com/spielrs/yew_styles) - JavaScript 의존성이 없는 Yew용 스타일링 프레임워크
+* [yew-mdc](https://github.com/Follpvosten/yew-mdc) - Material 디자인 컴포넌트
+* [muicss-yew](https://github.com/AlephAlpha/muicss-yew) - MUI CSS 컴포넌트
+* [Yewtify](https://github.com/yewstack/yewtify) – Yew의 Vuetify 프레임워크에서 제공하는 기능을 구현합니다.
 
-:::important contribute
-If you're developing a project adding styles to Yew please submit a PR adding yourself to this list!
+:::중요한 기여
+Yew에 스타일을 추가하는 프로젝트를 개발 중이라면 이 목록에 자신의 프로젝트를 추가하는 PR을 제출하십시오.
 
-[Link to the file containing the list](https://github.com/yewstack/yew/blob/master/docs/more/css.md).
+[목록이 포함된 파일 링크](https://github.com/yewstack/yew/blob/master/docs/more/css.md).
 :::
