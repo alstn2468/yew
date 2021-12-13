@@ -114,10 +114,12 @@ Now, let's create an `index.html` at the root of the project.
 Run the following command to build and serve the application locally.
 
 ```bash
-trunk serve
+trunk serve --open
 ```
 
-Trunk will watch the project directory and helpfully rebuild your application if you modify any source files.
+Trunk will open your application in your default browser, watch the project directory and helpfully rebuild your
+application if you modify any source files. If you are curious, you can run `trunk help` and `trunk help <subcommand>`
+for more details on what's happening.
 
 ### Congratulations
 
@@ -480,7 +482,7 @@ fn app() -> Html {
 +    let videos = use_state(|| vec![]);
 +    {
 +        let videos = videos.clone();
-+        use_effect(move || {
++        use_effect_with_deps(move |_| {
 +            let videos = videos.clone();
 +            wasm_bindgen_futures::spawn_local(async move {
 +                let fetched_videos: Vec<Video> = Request::get("https://yew.rs/tutorial/data.json")
@@ -493,7 +495,7 @@ fn app() -> Html {
 +                videos.set(fetched_videos);
 +            });
 +            || ()
-+        });
++        }, ());
 +    }
 
     // ...
