@@ -1,37 +1,38 @@
 ---
-title: "간단한 앱 구축하기"
+title: "샘플 앱 구축하기"
 ---
 
-## Create Project
+## 프로젝트 생성하기
 
-To get started, create a new cargo project.
+새롭게 생성된 폴더를 엽니다.
 
 ```bash
 cargo new yew-app
 ```
 
-Open the newly created directory.
+새롭게 생성된 폴더를 엽니다.
 
 ```bash
 cd yew-app
 ```
 
-## Run a hello world example
+## hello world 예시 실행하기
 
-To verify the Rust environment is setup, run the initial project using the cargo build tool.  After output about the build process, you should see the expected "Hello World" message.
+Rust 환경이 셋업된 것을 확인하려면 cargo 빌드 도구를 이용하여 초기 프로젝트를 실행하면 됩니다.
+빌드 과정에 대한 내용 출력이후 "Hello World"라는 메세지를 확인 할 수 있을겁니다.
 
 
 ```bash
 cargo run
 ```
 
-## Converting the project into a Yew web application
+## 프로젝트를 Yew 웹 애플리케이션으로 변경하기
 
-To convert this simple command line application to a basic Yew web application, a few changes are needed.
+이 간단한 command line 애플리케이션을 기본 Yew 웹 애플리케이션으로 변경하려면 약간의 수정이 필요합니다.
 
-### Update Cargo.toml
+### Cargo.toml 수정하기
 
-Add `yew` to the list of dependencies in the `Cargo.toml` file.
+`Cargo.toml`파일에 'yew'를 추가합니다:
 
 ```toml
 [package]
@@ -44,14 +45,15 @@ edition = "2018"
 yew = "0.17"
 ```
 
-### Update main.rs
+### main.rs 수정하기
 
-We need to generate a template which sets up a root Component called `Model` which renders a button that updates its value when clicked.
-Replace the contents of `src/main.rs` with the following code.
+`Model`이라는 루트 `컴포넌트`를 설정하여, 클릭하면 자동으로 업데이트되는 버튼을 표시하는 탬플릿을 만들어야 합니다.
+`src/main.rs`의 내용을 다음과 같이 수정합니다.
 
 :::note
-The line `yew::start_app::<Model>()` inside `main()` starts your application and mounts it to the page's `<body>` tag.  
-If you would like to start your application with any dynamic properties, you can instead use `yew::start_app_with_props::<Model>(..)`.
+`main()`안의 `yew::start_app::<Model>()`은 애플리케이션을 실행시키고 페이지의 `<body>`태그에 적용시킵니다.  
+만약 애플리케이션을 동적속성과 함께 실행하고 싶다면, 아래와 같이 작성하면 됩니다.
+`yew::start_app_with_props::<Model>(..)`.
 :::
 
 
@@ -80,15 +82,15 @@ impl Component for Model {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
-                // the value has changed so we need to
-                // re-render for it to appear on the page
+                 // value가 업데이트되었으므로
+                 // re-render 하여 페이지에 보이도록 합니다.
                 true
             }
         }
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        // This gives us a component's "`Scope`" which allows us to send messages, etc to the component. 
+        // 이는 컴포넌트의 "`Scope`"를 제공하며, 이는 컴포넌트로 메시지를 보내는 용도등으로 사용할 수 있습니다. 
         let link = ctx.link();
         html! {
             <div>
@@ -104,9 +106,9 @@ fn main() {
 }
 ```
 
-### Create index.html
+### index.html 생성하기
 
-Finally, add an `index.html` file in the root directory of your app.
+끝으로 애플리케이션의 루트 폴더에 `index.html`파일을 추가합니다.
 
 ```html
 <!DOCTYPE html>
@@ -118,18 +120,18 @@ Finally, add an `index.html` file in the root directory of your app.
 </html>
 ```
 
-## View your web application
+## 웹 애플리케이션 확인하기
 
-Run the following command to build and serve the application locally.
+애플리케이션을 다음 명령어를 실행한다면 로컬 환경에서 빌드가 되며 실행될 것 입니다.
 
 ```bash
 trunk serve
 ```
 
-Trunk will helpfully rebuild your application if you modify any of its files.
+Trunk의 파일이 수정된다면 Trunk는 애플리케이션을 다시 빌드 할것입니다.
 
-## Congratulations
+## 축하합니다
 
-You have now successfully setup your Yew development environment, and built your first web application.
+이제 Yew 개발 환경을 성공적으로 셋업하였고 첫 번째 웹 애플리케이션을 빌드했습니다.
 
-Experiment with this application and review the [examples](./examples.md) to further your learning.
+이 애플리케이션을 실험해보고 [예시](./examples.md)를 통해 더 학습해 보세요.
